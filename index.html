@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090d16">
+  <title>Abamy DF — Toko Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./">ABAMY <span>DF</span></a>
+    <nav><a href="./">Beranda</a><a href="#katalog">Katalog</a><a href="#akun">Akun Klien</a></nav>
+    <button id="openAuth" class="button button-outline">Login / Daftar</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">MARKETPLACE • TOKO ONLINE</div>
+      <h1>Tempat produkmu<br><span>menemukan pembeli.</span></h1>
+      <p>Etalase online untuk produk dan jasa. Klien dapat mengelola katalog sendiri setelah login.</p>
+      <div class="hero-actions">
+        <a class="button" href="#katalog">Lihat produk</a>
+        <button class="button button-outline" id="heroLogin">Mulai sebagai klien</button>
+      </div>
+      <div class="hero-glow"></div>
+    </section>
+
+    <section id="shopView" class="section hidden">
+      <div class="section-heading"><div><div class="eyebrow">ETALASE TOKO</div><h2 id="shopTitle">Toko klien</h2><p id="shopDescription"></p></div><a class="text-link" href="./">Lihat semua toko</a></div>
+      <div id="shopProducts" class="product-grid"></div>
+    </section>
+
+    <section id="katalog" class="section">
+      <div class="section-heading"><div><div class="eyebrow">KATALOG PUBLIK</div><h2>Produk terbaru</h2><p>Produk yang dipublikasikan oleh klien.</p></div><button id="refreshProducts" class="button button-outline">Muat ulang</button></div>
+      <div id="publicProducts" class="product-grid"><div class="empty-state">Memuat katalog…</div></div>
+    </section>
+
+    <section id="akun" class="section account-section">
+      <div class="section-heading"><div><div class="eyebrow">AREA KLIEN</div><h2>Kelola tokomu</h2><p>Login untuk mengunggah foto, mengatur harga, stok, dan publikasi produk.</p></div></div>
+      <div id="authPanel" class="panel">
+        <div class="auth-tabs"><button class="tab active" data-tab="login">Login</button><button class="tab" data-tab="signup">Daftar akun</button><button class="tab" data-tab="reset">Lupa sandi</button></div>
+        <form id="authForm" class="form-grid">
+          <label id="nameWrap" class="hidden">Nama toko<input id="storeName" autocomplete="organization" placeholder="Contoh: Abamy Fashion"></label>
+          <label>Email<input id="email" type="email" required autocomplete="email" placeholder="nama@email.com"></label>
+          <label id="slugWrap" class="hidden">Alamat toko (slug)<input id="storeSlug" placeholder="abamy-fashion" pattern="[a-z0-9-]+" title="Gunakan huruf kecil, angka, dan tanda hubung"></label>
+          <label id="passwordWrap">Kata sandi<input id="password" type="password" minlength="8" autocomplete="current-password" placeholder="Minimal 8 karakter"></label>
+          <button id="authSubmit" class="button" type="submit">Login</button>
+          <p id="authMessage" class="message" role="status"></p>
+        </form>
+      </div>
+
+      <div id="dashboard" class="hidden">
+        <div class="dashboard-head panel">
+          <div><div class="eyebrow">DASHBOARD KLIEN</div><h2 id="welcome">Toko saya</h2><p id="dashboardInfo">Kelola produk dan etalase.</p><a id="publicShopLink" class="text-link" target="_blank" rel="noopener">Buka toko publik ↗</a></div>
+          <button id="logout" class="button button-outline">Logout</button>
+        </div>
+        <div class="dashboard-layout">
+          <form id="productForm" class="panel form-grid">
+            <h3 id="productFormTitle">Tambah produk</h3>
+            <input id="productId" type="hidden">
+            <label>Nama produk<input id="productName" required maxlength="120" placeholder="Nama produk"></label>
+            <label>Deskripsi<textarea id="productDescription" rows="3" maxlength="2000" placeholder="Deskripsi produk"></textarea></label>
+            <div class="two-cols">
+              <label>Harga (Rp)<input id="productPrice" type="number" min="0" step="1" required placeholder="50000"></label>
+              <label>Stok<input id="productStock" type="number" min="0" step="1" required value="0"></label>
+            </div>
+            <label>Foto produk (JPG, PNG, WebP; maks. 5 MB)<input id="productImage" type="file" accept="image/jpeg,image/png,image/webp"></label>
+            <label class="checkline"><input id="productPublished" type="checkbox" checked> Publikasikan produk di toko</label>
+            <div class="two-cols"><button class="button" type="submit">Simpan produk</button><button id="cancelEdit" class="button button-outline" type="button">Bersihkan</button></div>
+            <p id="productMessage" class="message" role="status"></p>
+          </form>
+          <div class="panel">
+            <div class="list-heading"><h3>Produk saya</h3><span id="productCount" class="pill">0 produk</span></div>
+            <div id="myProducts" class="my-products"><div class="empty-state">Login untuk melihat produk.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>ABAMY DF</strong><span>Etalase online untuk usaha lokal.</span><small>Website ini membutuhkan konfigurasi Supabase sebelum fitur akun dan produk aktif.</small></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
